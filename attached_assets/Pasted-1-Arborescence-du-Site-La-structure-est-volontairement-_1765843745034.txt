@@ -1,0 +1,68 @@
+1. Arborescence du Site
+La structure est volontairement "plate" (peu de niveaux de profondeur) pour garantir que tout contenu est accessible en moins de 3 clics.
+• 1.0 Accueil (Home)
+• 2.0 Portfolio (Hub des projets)
+• 2.1 Page Projet Individuel (Template dynamique)
+• 3.0 À Propos (L'Ingénieur Humain)
+• 4.0 CV / Résumé
+• 5.0 Contact
+2. Disposition et Contenu Détaillés des Pages
+1.0 Page d'Accueil : L'Invitation
+• Haut de page (Hero Section) :
+• Une phrase d'accroche (Hook) centrée : "Ingénierie, Curiosité et Résolution de Problèmes."
+• Sous-titre avec votre nom et spécialité (ex: Génie Mécanique / Logiciel).
+• Bouton d'action principal (CTA) : "Explorer mes projets" (Ancre douce vers la section suivante).
+• Zone "Carrousel" (Demandé) :
+• Un bandeau horizontal occupant 50-60% de la largeur.
+• Contenu : Photos de vous en action (en labo, sur le terrain, en train de coder) ou rendus 3D de vos projets.
+• Effet : Défilement lent et automatique, transmettant une impression de mouvement et de vie.
+• Aperçu rapide : 3 icônes représentant vos domaines clés (ex: "Conception", "Analyse", "Prototypage") avec un lien direct vers le Portfolio.
+2.0 Page Portfolio (Hub)
+• Filtres : Une barre simple (ex: Tous, Mécanique, Logiciel, Académique).
+• Grille de Projets :
+• Cartes (Cards) visuelles. Au survol, l'image s'assombrit légèrement pour laisser apparaître le titre du projet et les technologies utilisées (C++, AutoCAD, Revit).
+2.1 Page Projet Individuel : La Structure "Double Niveau"
+C'est le cœur de l'expérience. Elle est divisée verticalement.
+• Niveau 1 : Le Résumé Exécutif (Haut de page)
+• Visuel : Une grande photo ou vidéo du produit final à gauche.
+• Contenu (Droite) :
+• Titre du projet.
+• Contexte : Scolaire / Stage / Personnel.
+• Réalisations : Ce que ça fait (2 phrases max).
+• Apprentissages clés : 3 "Bullet points" (ex: Gestion de mémoire, Résistance des matériaux).
+• Technologies : Badges visuels.
+• Niveau 2 : L'Approfondissement Technique (Bas de page)
+• Séparation visuelle (ex: ligne subtile ou changement de fond gris très clair).
+• L'Histoire du projet :
+• Le Défi : Quel était le problème initial ?
+• La Solution (Étapes) : Croquis, schémas, extraits de code (formatés proprement), calculs.
+• Les Obstacles : Un paragraphe honnête sur ce qui a échoué et comment vous l'avez résolu (montre la résilience).
+3.0 Page À Propos
+• Une photo portrait professionnelle mais souriante (pas une photo de passeport).
+• Texte narratif : "Pourquoi le génie ?" (Votre philosophie).
+• Section "Intérêts hors génie" (Sport, Musique) pour humaniser le profil.
+5.0 Contact
+• Formulaire épuré (Nom, Email, Message).
+• Liens vers LinkedIn et GitHub/Behance bien visibles.
+3. Système de Navigation
+Pour assurer la fluidité, la navigation ne doit jamais être une réflexion pour l'utilisateur.
+1. Menu Principal (Sticky) : Reste fixé en haut de l'écran lors du défilement. Fond légèrement translucide (effet "glassmorphism") pour la modernité.
+2. Fil d'Ariane (Breadcrumbs) : Essentiel sur les pages projets (ex: Accueil > Portfolio > Projet Robotique).
+3. Navigation Intra-Projet :
+• Dans la page projet, une table des matières flottante à droite (sur desktop) permet de sauter directement aux sections (Contexte, Code, Conclusion).
+4. Parcours Utilisateur Optimal (User Journey)
+L'objectif est de créer un entonnoir doux vers la compétence technique.
+1. Arrivée : L'utilisateur atterrit sur l'Accueil. Le carrousel capte son attention visuelle.
+2. Engagement : L'utilisateur clique sur "Explorer mes projets" ou scrolle vers le bas.
+3. Sélection : Il arrive sur la grille Portfolio. Les images claires l'incitent à cliquer sur un projet spécifique.
+4. Lecture Rapide (Niveau 1) : En 10 secondes, il voit la photo du projet et lit les "Apprentissages". S'il est pressé, il a déjà l'info clé.
+5. Immersion (Niveau 2) : Intéressé, il scrolle pour voir la technicité (le "vrai" génie).
+6. Rebond : Arrivé en bas de page, au lieu de remonter, il clique sur "Projet Suivant".
+7. Conversion : Après 2-3 projets, il clique sur "Contact" ou télécharge le CV.
+5. Transitions entre Projets (Le "Flow")
+Pour maximiser l'intuitivité et éviter les retours en arrière fastidieux :
+• Module de "Navigation Latérale" :
+• Au bas de chaque page de projet (après la conclusion), insérez une barre large divisée en deux.
+• Gauche : "Projet Précédent" (titre en petit).
+• Droite : "Projet Suivant" (titre en gros + flèche invitante).
+• Transition visuelle : Utiliser une transition de type "Slide" (glissement) ou "Fade" pour donner l'impression de tourner les pages d'un livre, plutôt qu'un rechargement brutal de page.
