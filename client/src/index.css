@@ -52,95 +52,80 @@
 
 /* WARM THEME - Atmosphere Chaleureuse */
 :root {
-  /* Base: Cream / Off-white */
-  --background: 40 20% 98%; 
-  /* Text: Dark Slate Grey (softer than black) */
-  --foreground: 210 15% 25%;
+  /* Base: Warm Beige/Peach Cream (matching the reference image vibe) */
+  --background: 26 50% 92%; /* Warm peach/beige */
+  /* Text: Dark Slate Grey */
+  --foreground: 210 15% 20%;
 
-  /* Cards: White to stand out slightly from cream bg */
+  /* Cards: White/Cream */
   --card: 0 0% 100%;
   --card-foreground: 210 15% 25%;
 
   --popover: 0 0% 100%;
   --popover-foreground: 210 15% 25%;
 
-  /* Accent: Burnt Orange / Terracotta */
-  --primary: 18 75% 55%;
+  /* Accent: Terra Cota (Burnt Orange) */
+  --primary: 16 65% 55%; 
   --primary-foreground: 40 20% 98%;
 
-  /* Secondary: Sage Green */
-  --secondary: 140 20% 92%; 
+  /* Secondary: Soft Sage/Warm Grey */
+  --secondary: 140 10% 90%; 
   --secondary-foreground: 140 30% 35%;
 
-  /* Muted elements */
-  --muted: 40 10% 94%;
-  --muted-foreground: 210 10% 50%;
+  --muted: 26 30% 85%;
+  --muted-foreground: 210 10% 40%;
 
-  /* Subtle accent for hover states etc */
-  --accent: 40 30% 94%;
-  --accent-foreground: 18 75% 55%;
+  --accent: 26 30% 88%;
+  --accent-foreground: 16 65% 55%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 40 10% 90%;
-  --input: 40 10% 90%;
-  --ring: 18 75% 55%;
+  --border: 26 20% 80%;
+  --input: 26 20% 80%;
+  --ring: 16 65% 55%;
 
-  /* Chart colors adapted to palette */
-  --chart-1: 18 75% 55%; /* Burnt Orange */
-  --chart-2: 140 30% 45%; /* Sage Green */
-  --chart-3: 210 15% 35%; /* Slate */
-  --chart-4: 45 60% 65%; /* Warm Yellow/Gold */
-  --chart-5: 180 25% 45%; /* Teal */
+  --chart-1: 16 65% 55%;
+  --chart-2: 140 30% 45%;
+  --chart-3: 210 15% 35%;
+  --chart-4: 45 60% 65%;
+  --chart-5: 180 25% 45%;
 
-  --sidebar: 40 20% 97%;
-  --sidebar-foreground: 210 15% 25%;
-  --sidebar-primary: 18 75% 55%;
+  --sidebar: 26 50% 92%;
+  --sidebar-foreground: 210 15% 20%;
+  --sidebar-primary: 16 65% 55%;
   --sidebar-primary-foreground: 40 20% 98%;
-  --sidebar-accent: 40 30% 94%;
-  --sidebar-accent-foreground: 18 75% 55%;
-  --sidebar-border: 40 10% 90%;
-  --sidebar-ring: 18 75% 55%;
+  --sidebar-accent: 26 30% 88%;
+  --sidebar-accent-foreground: 16 65% 55%;
+  --sidebar-border: 26 20% 80%;
+  --sidebar-ring: 16 65% 55%;
 }
 
 .dark {
-  /* Dark mode: Dark Slate / Charcoal base */
   --background: 210 15% 12%;
   --foreground: 40 20% 90%;
-
   --card: 210 15% 15%;
   --card-foreground: 40 20% 90%;
-
   --popover: 210 15% 15%;
   --popover-foreground: 40 20% 90%;
-
-  /* Keep Burnt Orange but maybe slightly desaturated or lighter for contrast */
   --primary: 18 70% 60%;
   --primary-foreground: 40 20% 90%;
-
   --secondary: 140 20% 20%;
   --secondary-foreground: 140 30% 80%;
-
   --muted: 210 15% 20%;
   --muted-foreground: 210 10% 65%;
-
   --accent: 210 15% 20%;
   --accent-foreground: 40 20% 90%;
-
   --destructive: 0 62% 30%;
   --destructive-foreground: 0 0% 98%;
-
   --border: 210 15% 20%;
   --input: 210 15% 20%;
   --ring: 18 70% 60%;
-
   --chart-1: 18 70% 60%;
   --chart-2: 140 30% 55%;
   --chart-3: 210 20% 50%;
   --chart-4: 45 50% 55%;
   --chart-5: 180 25% 55%;
-
   --sidebar: 210 15% 12%;
   --sidebar-foreground: 40 20% 90%;
   --sidebar-primary: 18 70% 60%;

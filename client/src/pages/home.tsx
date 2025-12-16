@@ -1,177 +1,220 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { motion } from "framer-motion";
-import { ArrowRight, PenTool, Cpu, Code2, ChevronRight } from "lucide-react";
+import { ArrowRight, Code2, Cpu, PenTool } from "lucide-react";
 import { Link } from "wouter";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import { motion } from "framer-motion";
 
 export default function Home() {
+  const heroImages = [
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop", // Portrait 1
+    "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1200&auto=format&fit=crop", // Working on laptop
+    "https://images.unsplash.com/photo-1581092921461-eab62e97a782?q=80&w=1200&auto=format&fit=crop", // In the lab
+  ];
+
+  const projects = [
+    {
+      id: 1,
+      title: "Bras Robotique",
+      summary: "Tri autonome par couleur",
+      tech: ["C++", "SolidWorks", "Arduino"],
+      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=600&auto=format&fit=crop"
+    },
+    {
+      id: 2,
+      title: "Dashboard IoT",
+      summary: "Monitoring solaire temps réel",
+      tech: ["React", "D3.js", "Node.js"],
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop"
+    },
+    {
+      id: 3,
+      title: "Drone Inspection",
+      summary: "Structure optimisée 3D",
+      tech: ["Fusion 360", "Aéro"],
+      image: "https://images.unsplash.com/photo-1506947411487-a56738267384?q=80&w=600&auto=format&fit=crop"
+    },
+    {
+      id: 4,
+      title: "Simulateur CFD",
+      summary: "Analyse de flux laminaire",
+      tech: ["Matlab", "Ansys"],
+      image: "https://images.unsplash.com/photo-1581093588401-fbb62a02f138?q=80&w=600&auto=format&fit=crop"
+    }
+  ];
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="min-h-screen bg-background text-foreground pb-20">
+      
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6 relative overflow-hidden">
-        {/* Background Decorative Blob */}
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-secondary/20 rounded-full blur-3xl" />
-
-        <div className="container mx-auto max-w-5xl text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Badge variant="outline" className="mb-6 px-4 py-1.5 text-sm border-primary/20 text-primary bg-primary/5 rounded-full">
-              Bienvenue sur mon portfolio
-            </Badge>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-foreground">
-              Ingénierie, Curiosité et <br className="hidden md:block" />
-              <span className="text-primary italic font-serif">Résolution de Problèmes.</span>
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 font-serif leading-relaxed">
-              Je suis <span className="font-semibold text-foreground">Ingénieur Mécanique & Logiciel</span>. 
-              Je construis des ponts entre le monde physique et le numérique avec une approche humaine.
-            </p>
+      <section className="px-4 pt-24 pb-8 md:pt-28 md:px-6">
+        <div className="container mx-auto max-w-2xl relative">
+          
+          {/* Rounded Image Container */}
+          <div className="relative aspect-[3/4] md:aspect-[4/5] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl">
+            <Carousel 
+              className="w-full h-full"
+              plugins={[
+                Autoplay({
+                  delay: 4000,
+                  stopOnInteraction: false,
+                }),
+              ]}
+              opts={{
+                loop: true,
+                duration: 60, // Slow scroll
+              }}
+            >
+              <CarouselContent className="h-full ml-0">
+                {heroImages.map((src, index) => (
+                  <CarouselItem key={index} className="h-full pl-0 basis-full">
+                    <img 
+                      src={src} 
+                      alt="Saad Assabar" 
+                      className="w-full h-full object-cover"
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
             
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/portfolio">
-                <Button size="lg" className="rounded-full px-8 h-12 text-base shadow-lg hover:shadow-primary/25 hover:translate-y-[-2px] transition-all">
-                  Explorer mes projets <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button variant="outline" size="lg" className="rounded-full px-8 h-12 text-base border-2 hover:bg-secondary/20">
-                  Me contacter
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+            {/* Overlay Gradient for Text Readability (Subtle) */}
+            <div className="absolute inset-0 bg-black/10" />
 
-      {/* Carousel Section */}
-      <section className="py-16 bg-white border-y border-border/50">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="w-full md:w-1/3 space-y-4">
-              <h2 className="text-3xl font-bold text-foreground">En Action</h2>
-              <p className="text-muted-foreground font-serif">
-                Un aperçu de mon quotidien : du prototypage en laboratoire au code en pleine nuit. 
-                L'ingénierie n'est pas qu'une théorie, c'est une pratique vivante.
-              </p>
-              <div className="flex gap-2 pt-2">
-                <div className="h-1.5 w-12 bg-primary rounded-full" />
-                <div className="h-1.5 w-12 bg-border rounded-full" />
+            {/* Staggered Name Overlay */}
+            <div className="absolute inset-0 flex flex-col justify-center items-center z-20 pointer-events-none">
+              <div className="flex flex-col relative w-full px-6">
+                <motion.h1 
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 1, delay: 0.2 }}
+                  className="text-[15vw] md:text-[8rem] font-bold leading-[0.85] text-[#FDFBF7] mix-blend-overlay tracking-tighter text-left self-start"
+                >
+                  SAAD
+                </motion.h1>
+                <motion.h1 
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 1, delay: 0.4 }}
+                  className="text-[15vw] md:text-[8rem] font-bold leading-[0.85] text-[#FDFBF7] mix-blend-overlay tracking-tighter text-right self-end mt-2 md:mt-4"
+                >
+                  ASSABAR
+                </motion.h1>
               </div>
             </div>
-            
-            <div className="w-full md:w-2/3">
-              <Carousel 
-                className="w-full"
-                plugins={[
-                  Autoplay({
-                    delay: 4000,
-                  }),
-                ]}
-                opts={{
-                  align: "start",
-                  loop: true,
-                }}
+          </div>
+
+        </div>
+      </section>
+
+      {/* Bio & CTA */}
+      <section className="px-6 container mx-auto max-w-2xl text-center space-y-10 mt-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          <p className="text-xl md:text-2xl font-serif leading-relaxed text-foreground/80">
+            Ingénieur passionné par la convergence entre mécanique et logiciel. 
+            Je conçois des systèmes complexes en les rendant simples et humains.
+            Basé à Paris, citoyen du monde.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+        >
+          <Link href="/portfolio">
+            <Button 
+              size="lg" 
+              className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-12 py-8 text-lg font-semibold shadow-lg shadow-primary/20 transition-all hover:scale-105"
+            >
+              Voir mes projets
+            </Button>
+          </Link>
+        </motion.div>
+      </section>
+
+      {/* Spacer */}
+      <div className="h-32" />
+
+      {/* Projects Pastilles (Scrolling) */}
+      <section className="pl-6 overflow-hidden">
+        <div className="container mx-auto mb-6">
+          <h2 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Projets Récents</h2>
+        </div>
+        
+        {/* Horizontal Scroll Area */}
+        <div className="flex gap-6 overflow-x-auto pb-12 pr-6 snap-x snap-mandatory scrollbar-hide">
+          {projects.map((project, index) => (
+            <Link key={project.id} href={`/project/${project.id}`}>
+              <motion.div 
+                className="relative shrink-0 w-[280px] h-[360px] md:w-[320px] md:h-[420px] rounded-[2rem] overflow-hidden cursor-pointer group snap-center"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 1 + (index * 0.1) }}
               >
-                <CarouselContent>
-                  {[1, 2, 3].map((_, index) => (
-                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-2/3 pl-6">
-                      <div className="p-1">
-                        <Card className="border-0 shadow-md overflow-hidden rounded-2xl aspect-[4/3] group cursor-pointer relative">
-                          <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors z-10" />
-                          <img 
-                            src={`https://images.unsplash.com/photo-${index === 0 ? '1581091226825-a6a2a5aee158' : index === 1 ? '1537432376769-00f5c2f4c8d3' : '1517077304055-6e89abbec40b'}?q=80&w=800&auto=format&fit=crop`}
-                            alt="Project" 
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          />
-                          <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent z-20">
-                            <p className="text-white font-medium">Session de prototypage #{index + 1}</p>
-                          </div>
-                        </Card>
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <div className="flex justify-end gap-2 mt-4 mr-4">
-                  <CarouselPrevious className="static translate-y-0" />
-                  <CarouselNext className="static translate-y-0" />
+                {/* Image Background */}
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  className="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:grayscale-[0.8]"
+                />
+                
+                {/* Default State: Just a subtle gradient or title maybe? 
+                    User asked: "displays name, summary, skills ON HOVER".
+                    So initially, let's keep it clean or just minimal info.
+                */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors duration-300" />
+
+                {/* Content Reveal on Hover */}
+                <div className="absolute inset-0 p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0">
+                  <h3 className="text-2xl font-bold text-white mb-2">{project.title}</h3>
+                  <p className="text-white/80 font-serif text-sm mb-4 leading-relaxed line-clamp-2">
+                    {project.summary}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map(t => (
+                      <Badge key={t} variant="secondary" className="bg-white/20 text-white border-none backdrop-blur-sm text-xs">
+                        {t}
+                      </Badge>
+                    ))}
+                  </div>
+                  <div className="mt-6 flex items-center text-primary-foreground font-medium text-sm">
+                    Découvrir <ArrowRight className="ml-2 w-4 h-4" />
+                  </div>
                 </div>
-              </Carousel>
-            </div>
-          </div>
+
+                {/* Non-hover indicator (optional) */}
+                <div className="absolute bottom-6 left-6 group-hover:opacity-0 transition-opacity duration-300">
+                  <h3 className="text-white font-bold text-xl drop-shadow-md">{project.title}</h3>
+                </div>
+              </motion.div>
+            </Link>
+          ))}
+          
+          {/* "See All" Card */}
+          <Link href="/portfolio">
+             <motion.div 
+                className="relative shrink-0 w-[200px] h-[360px] md:w-[240px] md:h-[420px] rounded-[2rem] bg-secondary/30 flex items-center justify-center cursor-pointer hover:bg-secondary/50 transition-colors snap-center"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 1.5 }}
+              >
+                <div className="text-center p-6">
+                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mx-auto mb-4 text-primary">
+                    <ArrowRight className="w-6 h-6" />
+                  </div>
+                  <span className="font-bold text-foreground">Voir tout le portfolio</span>
+                </div>
+              </motion.div>
+          </Link>
         </div>
       </section>
 
-      {/* Quick Overview */}
-      <section className="py-24 px-6 bg-secondary/30">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Mes Domaines d'Expertise</h2>
-            <p className="text-muted-foreground font-serif max-w-2xl mx-auto">
-              Je ne me contente pas de concevoir ou de coder. Je cherche la synergie entre les systèmes physiques et l'intelligence numérique.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Link href="/portfolio?filter=conception">
-              <Card className="group hover:shadow-xl transition-all duration-300 border-none shadow-sm cursor-pointer overflow-hidden bg-white">
-                <CardContent className="p-8 flex flex-col items-center text-center">
-                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform duration-300">
-                    <PenTool className="w-8 h-8" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">Conception</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                    De la CAO à l'impression 3D, je donne forme aux idées avec précision et esthétique fonctionnelle.
-                  </p>
-                  <span className="text-primary text-sm font-semibold flex items-center mt-auto opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
-                    Voir les projets <ChevronRight className="w-4 h-4 ml-1" />
-                  </span>
-                </CardContent>
-              </Card>
-            </Link>
-
-            <Link href="/portfolio?filter=analyse">
-              <Card className="group hover:shadow-xl transition-all duration-300 border-none shadow-sm cursor-pointer overflow-hidden bg-white">
-                <CardContent className="p-8 flex flex-col items-center text-center">
-                  <div className="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center mb-6 text-blue-600 group-hover:scale-110 transition-transform duration-300">
-                    <Cpu className="w-8 h-8" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-blue-600 transition-colors">Analyse</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                    Simulation FEA, calculs structurels et optimisation thermique. Rien n'est laissé au hasard.
-                  </p>
-                  <span className="text-blue-600 text-sm font-semibold flex items-center mt-auto opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
-                    Voir les projets <ChevronRight className="w-4 h-4 ml-1" />
-                  </span>
-                </CardContent>
-              </Card>
-            </Link>
-
-            <Link href="/portfolio?filter=prototypage">
-              <Card className="group hover:shadow-xl transition-all duration-300 border-none shadow-sm cursor-pointer overflow-hidden bg-white">
-                <CardContent className="p-8 flex flex-col items-center text-center">
-                  <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mb-6 text-green-600 group-hover:scale-110 transition-transform duration-300">
-                    <Code2 className="w-8 h-8" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-green-600 transition-colors">Software</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                    Développement embarqué, scripts d'automatisation et interfaces utilisateurs intuitives.
-                  </p>
-                  <span className="text-green-600 text-sm font-semibold flex items-center mt-auto opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
-                    Voir les projets <ChevronRight className="w-4 h-4 ml-1" />
-                  </span>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
