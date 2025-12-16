@@ -4,9 +4,16 @@ import { ArrowRight, Code2, Cpu, PenTool } from "lucide-react";
 import { Link } from "wouter";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Home() {
+  const { scrollYProgress } = useScroll();
+  const backgroundColor = useTransform(
+    scrollYProgress,
+    [0, 0.4, 0.8],
+    ["#FCE4D5", "#be6023", "#FCE4D5"]
+  );
+
   const heroImages = [
     "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop", // Portrait 1
     "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1200&auto=format&fit=crop", // Working on laptop
@@ -45,19 +52,22 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground pb-20">
+    <motion.div 
+      className="min-h-screen pb-20"
+      style={{ backgroundColor }}
+    >
       
       {/* Hero Section */}
       <section className="px-4 pt-24 pb-8 md:pt-28 md:px-6">
         <div className="container mx-auto max-w-2xl relative">
           
           {/* Rounded Image Container */}
-          <div className="relative aspect-[3/4] md:aspect-[4/5] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl">
+          <div className="relative aspect-[3/4] md:aspect-[4/5] rounded-[2rem] md:rounded-[3rem] overflow-hidden">
             <Carousel 
               className="w-full h-full"
               plugins={[
                 Autoplay({
-                  delay: 4000,
+                  delay: 3500,
                   stopOnInteraction: false,
                 }),
               ]}
@@ -89,7 +99,7 @@ export default function Home() {
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 1, delay: 0.2 }}
-                  className="text-[15vw] md:text-[8rem] font-bold leading-[0.8] text-background mix-blend-normal tracking-tighter text-right self-end"
+                  className="text-[15vw] md:text-[8rem] font-bold leading-[0.8] text-[#FCE4D5] mix-blend-normal tracking-tighter text-right self-end"
                 >
                   Saad
                 </motion.h1>
@@ -97,7 +107,7 @@ export default function Home() {
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 1, delay: 0.4 }}
-                  className="text-[15vw] md:text-[8rem] font-bold leading-[0.8] text-background mix-blend-normal tracking-tighter text-left self-start mt-2 md:mt-4"
+                  className="text-[15vw] md:text-[8rem] font-bold leading-[0.8] text-[#FCE4D5] mix-blend-normal tracking-tighter text-left self-start mt-2 md:mt-4"
                 >
                   Assabar
                 </motion.h1>
@@ -109,13 +119,13 @@ export default function Home() {
       </section>
 
       {/* Bio & CTA */}
-      <section className="px-6 container mx-auto max-w-2xl text-center space-y-10 mt-12">
+      <section className="px-6 container mx-auto max-w-2xl mt-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <p className="text-xl md:text-2xl font-serif leading-relaxed text-foreground/80">
+          <p className="text-xl md:text-2xl font-serif leading-relaxed text-black font-bold text-justify">
             Ingénieur passionné par la convergence entre mécanique et logiciel. 
             Je conçois des systèmes complexes en les rendant simples et humains.
             Basé à Paris, citoyen du monde.
@@ -126,6 +136,7 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.8 }}
+          className="text-center mt-10"
         >
           <Link href="/portfolio">
             <Button 
@@ -215,6 +226,6 @@ export default function Home() {
         </div>
       </section>
 
-    </div>
+    </motion.div>
   );
 }
