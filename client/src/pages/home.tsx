@@ -179,11 +179,11 @@ export default function Home() {
       {/* Projects Pastilles (Scrolling) */}
       <section className="pl-6 overflow-hidden">
         <div className="container mx-auto mb-6">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Projets Récents</h2>
+          <h2 className="text-2xl font-bold uppercase tracking-widest text-black">Projets Récents</h2>
         </div>
         
         {/* Horizontal Scroll Area */}
-        <div className="flex gap-6 overflow-x-auto pb-12 pr-6 snap-x snap-mandatory scrollbar-hide">
+        <div className="flex gap-6 overflow-x-auto pb-6 pr-6 snap-x snap-mandatory scrollbar-hide">
           {projects.map((project, index) => (
             <Link key={project.id} href={`/project/${project.id}`}>
               <motion.div 
@@ -251,16 +251,23 @@ export default function Home() {
       </section>
 
       {/* Contact CTA */}
-      <section className="container mx-auto max-w-4xl px-6 pb-20 pt-10 text-center">
-        <Link href="/contact">
-          <Button 
-            variant="outline"
-            size="lg"
-            className="rounded-full px-10 py-6 text-lg border-2 border-[#567A5A] text-[#567A5A] hover:bg-[#567A5A] hover:text-white transition-all hover:scale-105"
-          >
-            Me contacter
-          </Button>
-        </Link>
+      <section className="container mx-auto max-w-5xl px-6 pb-20 pt-4">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8" style={{ fontFamily: '"Architects Daughter", cursive' }}>
+           <div className="flex flex-col items-start">
+               <h2 className="text-5xl md:text-6xl font-bold text-black mb-2">Me contacter</h2>
+               {/* Hand-drawn style arrow */}
+               <svg width="120" height="60" viewBox="0 0 120 60" className="text-black fill-none stroke-current stroke-[4] ml-2 mt-2">
+                   <path d="M10 30 C 40 10, 80 10, 110 30" strokeLinecap="round" />
+                   <path d="M 90 15 L 110 30 L 95 45" strokeLinecap="round" strokeLinejoin="round" />
+               </svg>
+           </div>
+
+           <Link href="/contact">
+               <button className="text-4xl text-black border-[4px] border-black rounded-2xl px-12 py-4 bg-transparent hover:bg-black hover:text-white transition-all cursor-pointer transform hover:-rotate-2 hover:scale-105">
+                   Ici
+               </button>
+           </Link>
+        </div>
       </section>
 
     </motion.div>
