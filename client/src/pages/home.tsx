@@ -12,12 +12,12 @@ export default function Home() {
   // Transition logic:
   // 0 - 0.2: Initial Beige
   // 0.25: Button is crossed roughly (based on visual layout estimation)
-  // 0.25 - 0.5: Transition to Green Lily
-  // 0.5 - 1.0: Stay Green Lily
+  // 0.25 - 0.5: Transition to Terra Cotta
+  // 0.5 - 1.0: Stay Terra Cotta
   const backgroundColor = useTransform(
     scrollYProgress,
     [0, 0.25, 0.5],
-    ["#FCE4D5", "#FCE4D5", "#E3F2E1"]
+    ["#FCE4D5", "#FCE4D5", "#be6920"]
   );
 
   const heroImages = [
@@ -125,7 +125,7 @@ export default function Home() {
       </section>
 
       {/* Bio & CTA */}
-      <section className="px-6 container mx-auto max-w-2xl mt-12">
+      <section className="px-6 container mx-auto max-w-2xl mt-3">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -147,7 +147,7 @@ export default function Home() {
           <Link href="/portfolio">
             <Button 
               size="lg" 
-              className="bg-[#FF6F61] text-white hover:bg-[#FF6F61]/90 rounded-xl px-16 py-8 text-lg font-semibold shadow-lg shadow-[#FF6F61]/20 transition-all hover:scale-105 w-full md:w-auto"
+              className="bg-[#8E270E] text-white hover:bg-[#8E270E]/90 rounded-xl px-16 py-8 text-lg font-semibold shadow-lg shadow-[#8E270E]/20 transition-all hover:scale-105 w-full md:w-auto"
             >
               Découvrir mes projets
             </Button>
