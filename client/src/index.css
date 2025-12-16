@@ -52,8 +52,8 @@
 
 /* WARM THEME - Atmosphere Chaleureuse */
 :root {
-  /* Base: Warm Beige/Peach Cream (matching the reference image vibe) */
-  --background: 26 50% 92%; /* Warm peach/beige */
+  /* Base: Darker Beige (Sand/Tan) */
+  --background: 30 30% 85%; 
   /* Text: Dark Slate Grey */
   --foreground: 210 15% 20%;
 

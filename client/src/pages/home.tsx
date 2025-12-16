@@ -83,23 +83,23 @@ export default function Home() {
             <div className="absolute inset-0 bg-black/10" />
 
             {/* Staggered Name Overlay */}
-            <div className="absolute inset-0 flex flex-col justify-center items-center z-20 pointer-events-none">
-              <div className="flex flex-col relative w-full px-6">
-                <motion.h1 
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 1, delay: 0.2 }}
-                  className="text-[15vw] md:text-[8rem] font-bold leading-[0.85] text-[#FDFBF7] mix-blend-overlay tracking-tighter text-left self-start"
-                >
-                  SAAD
-                </motion.h1>
+            <div className="absolute inset-0 flex flex-col justify-end pb-8 md:pb-12 z-20 pointer-events-none">
+              <div className="flex flex-col relative w-full px-6 md:px-12">
                 <motion.h1 
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 1, delay: 0.4 }}
-                  className="text-[15vw] md:text-[8rem] font-bold leading-[0.85] text-[#FDFBF7] mix-blend-overlay tracking-tighter text-right self-end mt-2 md:mt-4"
+                  transition={{ duration: 1, delay: 0.2 }}
+                  className="text-[15vw] md:text-[8rem] font-bold leading-[0.8] text-background mix-blend-normal tracking-tighter text-right self-end"
                 >
-                  ASSABAR
+                  Saad
+                </motion.h1>
+                <motion.h1 
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 1, delay: 0.4 }}
+                  className="text-[15vw] md:text-[8rem] font-bold leading-[0.8] text-background mix-blend-normal tracking-tighter text-left self-start -mt-2 md:-mt-6"
+                >
+                  Assabar
                 </motion.h1>
               </div>
             </div>
