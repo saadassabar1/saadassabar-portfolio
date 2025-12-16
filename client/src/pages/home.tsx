@@ -17,7 +17,7 @@ export default function Home() {
   const backgroundColor = useTransform(
     scrollYProgress,
     [0, 0.25, 0.5],
-    ["#FCE4D5", "#FCE4D5", "#be6920"]
+    ["#FCE4D5", "#FCE4D5", "#9C4221"]
   );
 
   const heroImages = [
@@ -125,7 +125,7 @@ export default function Home() {
       </section>
 
       {/* Bio & CTA */}
-      <section className="px-6 container mx-auto max-w-2xl mt-3">
+      <section className="px-6 container mx-auto max-w-2xl mt-1">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -147,7 +147,7 @@ export default function Home() {
           <Link href="/portfolio">
             <Button 
               size="lg" 
-              className="bg-[#8E270E] text-white hover:bg-[#8E270E]/90 rounded-xl px-16 py-8 text-lg font-semibold shadow-lg shadow-[#8E270E]/20 transition-all hover:scale-105 w-full md:w-auto"
+              className="bg-[#567A5A] text-white hover:bg-[#567A5A]/90 rounded-xl px-16 py-8 text-lg font-semibold shadow-lg shadow-[#567A5A]/20 transition-all hover:scale-105 w-full md:w-auto"
             >
               Découvrir mes projets
             </Button>
@@ -230,6 +230,19 @@ export default function Home() {
               </motion.div>
           </Link>
         </div>
+      </section>
+
+      {/* Contact CTA */}
+      <section className="container mx-auto max-w-4xl px-6 pb-20 pt-10 text-center">
+        <Link href="/contact">
+          <Button 
+            variant="outline"
+            size="lg"
+            className="rounded-full px-10 py-6 text-lg border-2 border-[#567A5A] text-[#567A5A] hover:bg-[#567A5A] hover:text-white transition-all hover:scale-105"
+          >
+            Me contacter
+          </Button>
+        </Link>
       </section>
 
     </motion.div>
