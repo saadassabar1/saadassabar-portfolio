@@ -83,8 +83,8 @@ export default function Home() {
             <div className="absolute inset-0 bg-black/10" />
 
             {/* Staggered Name Overlay */}
-            <div className="absolute inset-0 flex flex-col justify-end pb-8 md:pb-12 z-20 pointer-events-none">
-              <div className="flex flex-col relative w-full px-6 md:px-12">
+            <div className="absolute inset-0 flex flex-col justify-end pb-12 md:pb-20 z-20 pointer-events-none">
+              <div className="flex flex-col relative w-full px-8 md:px-16">
                 <motion.h1 
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -97,7 +97,7 @@ export default function Home() {
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 1, delay: 0.4 }}
-                  className="text-[15vw] md:text-[8rem] font-bold leading-[0.8] text-background mix-blend-normal tracking-tighter text-left self-start -mt-2 md:-mt-6"
+                  className="text-[15vw] md:text-[8rem] font-bold leading-[0.8] text-background mix-blend-normal tracking-tighter text-left self-start mt-2 md:mt-4"
                 >
                   Assabar
                 </motion.h1>
