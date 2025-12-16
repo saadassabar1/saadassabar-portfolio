@@ -2,9 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Code2, Cpu, PenTool } from "lucide-react";
 import { Link } from "wouter";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
@@ -25,6 +24,15 @@ export default function Home() {
     "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1200&auto=format&fit=crop", // Working on laptop
     "https://images.unsplash.com/photo-1581092921461-eab62e97a782?q=80&w=1200&auto=format&fit=crop", // In the lab
   ];
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
 
   const projects = [
     {
@@ -64,39 +72,49 @@ export default function Home() {
     >
       
       {/* Hero Section */}
-      <section className="px-4 pt-24 pb-8 md:pt-28 md:px-6">
+      <section className="px-4 pt-0 pb-8 md:px-6 -mt-8 md:-mt-10">
         <div className="container mx-auto max-w-2xl relative">
           
           {/* Rounded Image Container */}
-          <div className="relative aspect-[3/4] md:aspect-[4/5] rounded-[2rem] md:rounded-[3rem] overflow-hidden">
-            <Carousel 
-              className="w-full h-full"
-              plugins={[
-                Autoplay({
-                  delay: 3500,
-                  stopOnInteraction: false,
-                }),
-              ]}
-              opts={{
-                loop: true,
-                duration: 60, // Slow scroll
-              }}
-            >
-              <CarouselContent className="h-full ml-0">
-                {heroImages.map((src, index) => (
-                  <CarouselItem key={index} className="h-full pl-0 basis-full">
-                    <img 
-                      src={src} 
-                      alt="Saad Assabar" 
-                      className="w-full h-full object-cover"
-                    />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-            </Carousel>
+          <div className="relative aspect-[3/4] md:aspect-[4/5] rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-black">
+            
+            {/* Custom Flash Transition Slideshow */}
+            <div className="absolute inset-0 w-full h-full">
+              <AnimatePresence mode="wait">
+                 {/* 
+                    "Photo Click" Effect:
+                    We just simply switch the image. The key is the 'flash' overlay.
+                    We actually don't need AnimatePresence on the image itself if we want a hard cut.
+                    We just switch the src. But AnimatePresence helps with key-based unmounting.
+                    Let's use a simple hard cut for the image, and a separate flash overlay.
+                 */}
+                 <motion.img 
+                    key={currentImageIndex}
+                    src={heroImages[currentImageIndex]}
+                    alt="Saad Assabar"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    initial={{ opacity: 1 }} // It's a hard cut, so start visible
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 1 }}
+                    transition={{ duration: 0 }} // Instant switch
+                 />
+              </AnimatePresence>
+
+               {/* The Flash Overlay */}
+               <AnimatePresence>
+                 <motion.div
+                   key={`flash-${currentImageIndex}`}
+                   initial={{ opacity: 1 }}
+                   animate={{ opacity: 0 }}
+                   exit={{ opacity: 0 }}
+                   transition={{ duration: 0.4, ease: "easeOut" }} // Quick fade out
+                   className="absolute inset-0 bg-white z-10 pointer-events-none"
+                 />
+               </AnimatePresence>
+            </div>
             
             {/* Overlay Gradient for Text Readability (Subtle) */}
-            <div className="absolute inset-0 bg-black/10" />
+            <div className="absolute inset-0 bg-black/10 z-20 pointer-events-none" />
 
             {/* Staggered Name Overlay */}
             <div className="absolute inset-0 flex flex-col justify-end pb-12 md:pb-20 z-20 pointer-events-none">
@@ -147,7 +165,7 @@ export default function Home() {
           <Link href="/portfolio">
             <Button 
               size="lg" 
-              className="bg-[#567A5A] text-white hover:bg-[#567A5A]/90 rounded-xl px-16 py-8 text-lg font-semibold shadow-lg shadow-[#567A5A]/20 transition-all hover:scale-105 w-full md:w-auto"
+              className="bg-[#FF6F61] text-white hover:bg-[#FF6F61]/90 rounded-xl px-16 py-8 text-lg font-semibold shadow-lg shadow-[#FF6F61]/20 transition-all hover:scale-105 w-full md:w-auto"
             >
               Découvrir mes projets
             </Button>
