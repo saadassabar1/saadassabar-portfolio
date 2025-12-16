@@ -8,10 +8,16 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
+  
+  // Transition logic:
+  // 0 - 0.2: Initial Beige
+  // 0.25: Button is crossed roughly (based on visual layout estimation)
+  // 0.25 - 0.5: Transition to Green Lily
+  // 0.5 - 1.0: Stay Green Lily
   const backgroundColor = useTransform(
     scrollYProgress,
-    [0, 0.4, 0.8],
-    ["#FCE4D5", "#be6023", "#FCE4D5"]
+    [0, 0.25, 0.5],
+    ["#FCE4D5", "#FCE4D5", "#E3F2E1"]
   );
 
   const heroImages = [
@@ -141,16 +147,16 @@ export default function Home() {
           <Link href="/portfolio">
             <Button 
               size="lg" 
-              className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-12 py-8 text-lg font-semibold shadow-lg shadow-primary/20 transition-all hover:scale-105"
+              className="bg-[#FF6F61] text-white hover:bg-[#FF6F61]/90 rounded-xl px-16 py-8 text-lg font-semibold shadow-lg shadow-[#FF6F61]/20 transition-all hover:scale-105 w-full md:w-auto"
             >
-              Voir mes projets
+              Découvrir mes projets
             </Button>
           </Link>
         </motion.div>
       </section>
 
       {/* Spacer */}
-      <div className="h-32" />
+      <div className="h-24" />
 
       {/* Projects Pastilles (Scrolling) */}
       <section className="pl-6 overflow-hidden">
@@ -163,7 +169,7 @@ export default function Home() {
           {projects.map((project, index) => (
             <Link key={project.id} href={`/project/${project.id}`}>
               <motion.div 
-                className="relative shrink-0 w-[280px] h-[360px] md:w-[320px] md:h-[420px] rounded-[2rem] overflow-hidden cursor-pointer group snap-center"
+                className="relative shrink-0 w-[300px] h-[500px] md:w-[350px] md:h-[550px] rounded-[2rem] overflow-hidden cursor-pointer group snap-center"
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 1 + (index * 0.1) }}
