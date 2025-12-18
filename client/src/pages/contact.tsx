@@ -12,7 +12,7 @@ export default function Contact() {
   const { scrollYProgress } = useScroll();
 
   // REMPLACEZ 'votre_id_ici' par l'ID fourni par Formspree
-  const [state, handleSubmit] = useForm("https://formspree.io/f/mjgbvaqn");
+  const [state, handleSubmit] = useForm("mjgbvaqn");
 
   const backgroundColor = useTransform(
     scrollYProgress,
