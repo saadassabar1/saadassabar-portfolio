@@ -9,7 +9,8 @@ import Portfolio from "@/pages/portfolio";
 import ProjectDetail from "@/pages/project";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
-import { Navbar } from "@/components/layout/Navbar";
+
+// L'import de Navbar a été supprimé ici
 
 function Router() {
   return (
@@ -29,7 +30,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <div className="min-h-screen bg-background font-serif text-foreground selection:bg-primary/20">
-          <Navbar />
+          {/* L'ancienne <Navbar /> a été supprimée ici */}
           <main>
             <Router />
           </main>

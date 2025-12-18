@@ -1,10 +1,11 @@
-import { useParams, Link } from "wouter";
+import { useParams, Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, ArrowRight, CheckCircle2, ChevronRight, FileText, Code, Settings } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, ChevronRight, ChevronLeft, FileText, Code, Settings, Home as HomeIcon, Grid, Mail } from "lucide-react";
 import { useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
-// Mock data - normally would come from a store or API
+// Mock data
 const projectData = {
   1: {
     title: "Bras Robotique Autonome",
@@ -41,199 +42,332 @@ const projectData = {
     },
     nextId: 3,
     prevId: 1
+  },
+  3: {
+     title: "Drone d'Inspection",
+     category: "Mécanique",
+     context: "Projet Personnel",
+     image: "https://images.unsplash.com/photo-1506947411487-a56738267384?q=80&w=1200&auto=format&fit=crop",
+     summary: "Optimisation structurelle pour un drone léger.",
+     learnings: ["Aérodynamisme", "Fusion 360", "Impression 3D"],
+     tech: ["Fusion 360", "Betaflight"],
+     story: { challenge: "...", solution: "...", obstacles: "..." },
+     nextId: 4, prevId: 2
+  },
+  4: {
+     title: "Simulateur de Flux",
+     category: "Académique",
+     context: "Projet de Recherche",
+     image: "https://images.unsplash.com/photo-1581093588401-fbb62a02f138?q=80&w=1200&auto=format&fit=crop",
+     summary: "Étude CFD sur les écoulements laminaires.",
+     learnings: ["Matlab", "Simulation Numérique", "Physique des fluides"],
+     tech: ["Matlab", "Ansys"],
+     story: { challenge: "...", solution: "...", obstacles: "..." },
+     nextId: 1, prevId: 3
   }
 };
 
 export default function ProjectDetail() {
   const params = useParams();
   const id = parseInt(params.id || "1");
-  const project = projectData[id as keyof typeof projectData] || projectData[1];
+  // @ts-ignore
+  const project = projectData[id] || projectData[1];
+  const [location] = useLocation();
+  const { scrollYProgress } = useScroll();
+
+  // --- TRANSITION DE COULEUR ---
+  const backgroundColor = useTransform(
+    scrollYProgress,
+    [0, 0.6], 
+    ["#FCE4D6", "#D69F8E"] 
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Breadcrumbs */}
-      <div className="pt-24 pb-4 px-6 container mx-auto">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground font-serif">
-          <Link href="/">Accueil</Link>
-          <ChevronRight className="w-4 h-4" />
-          <Link href="/portfolio">Portfolio</Link>
-          <ChevronRight className="w-4 h-4" />
-          <span className="text-primary font-medium">{project.title}</span>
-        </div>
+    <motion.div 
+      className="min-h-screen pb-32 relative overflow-hidden"
+      style={{ backgroundColor }}
+    >
+
+      {/* ============================================================== */}
+      {/* FOND LIQUID GLASS                                              */}
+      {/* ============================================================== */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+          <motion.div 
+            animate={{
+              x: ["-20%", "40%", "-20%"],
+              y: ["-20%", "10%", "-20%"],
+              rotate: [0, 180, 360],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute top-[-20%] left-[-20%] w-[90vw] h-[90vw] bg-[#C08B7B] rounded-full mix-blend-multiply filter blur-[100px] opacity-20"
+          />
+
+          <motion.div 
+            animate={{
+              x: ["20%", "-30%", "20%"],
+              y: ["20%", "-20%", "20%"],
+              scale: [1.2, 0.8, 1.2],
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[20%] right-[-20%] w-[80vw] h-[80vw] bg-[#FF9A8B] rounded-full mix-blend-multiply filter blur-[90px] opacity-25"
+          />
+
+          <motion.div 
+            animate={{
+              scale: [1, 1.3, 1],
+              x: ["-10%", "10%", "-10%"],
+              opacity: [0.4, 0.7, 0.4],
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-[-10%] left-[20%] w-[60vw] h-[60vw] bg-white rounded-full mix-blend-overlay filter blur-[80px]"
+          />
+
+          <div className="absolute inset-0 opacity-[0.06] mix-blend-multiply" 
+               style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} 
+          />
       </div>
 
-      {/* Level 1: Executive Summary */}
-      <section className="container mx-auto px-6 mb-20">
-        <div className="flex flex-col lg:flex-row gap-12 items-start">
-          {/* Visual (Left) */}
-          <div className="w-full lg:w-3/5">
-            <div className="rounded-2xl overflow-hidden shadow-2xl shadow-primary/10 aspect-video relative group">
-              <img 
-                src={project.image} 
-                alt={project.title} 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-2xl" />
-            </div>
-          </div>
+      {/* ============================================================== */}
+      {/* CONTENU PRINCIPAL (Z-10)                                       */}
+      {/* ============================================================== */}
+      <div className="relative z-10 pt-24">
 
-          {/* Content (Right) */}
-          <div className="w-full lg:w-2/5 space-y-8">
-            <div>
-              <Badge variant="outline" className="mb-4 text-primary border-primary/20 bg-primary/5 px-3 py-1">
-                {project.context}
-              </Badge>
-              <h1 className="text-4xl font-bold text-foreground mb-2 leading-tight">
-                {project.title}
-              </h1>
-              <p className="text-xl text-muted-foreground font-serif italic">
-                {project.category}
-              </p>
-            </div>
-
-            <div className="prose prose-slate text-foreground">
-              <p className="font-medium text-lg border-l-4 border-primary pl-4 py-1 bg-secondary/10">
-                {project.summary}
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-4 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4" /> Ce que j'ai appris
-              </h3>
-              <ul className="space-y-3">
-                {project.learnings.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-foreground/80 bg-white p-3 rounded-lg shadow-sm border border-border/50">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-4">Technologies</h3>
-              <div className="flex flex-wrap gap-2">
-                {project.tech.map((t) => (
-                  <Badge key={t} variant="secondary" className="px-3 py-1 bg-slate-100 text-slate-700 hover:bg-slate-200 border-0">
-                    {t}
-                  </Badge>
-                ))}
-              </div>
-            </div>
+        {/* Breadcrumbs */}
+        <div className="px-6 container mx-auto mb-8">
+          <div className="flex items-center gap-2 text-base text-black/60 font-serif font-medium bg-white/30 backdrop-blur-sm w-fit px-5 py-2.5 rounded-full border border-white/20">
+            <Link href="/">Accueil</Link>
+            <ChevronRight className="w-5 h-5" />
+            <Link href="/portfolio">Portfolio</Link>
+            <ChevronRight className="w-5 h-5" />
+            <span className="text-black font-bold">{project.title}</span>
           </div>
         </div>
-      </section>
 
-      {/* Visual Separation */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-border to-transparent my-12" />
-
-      {/* Level 2: Technical Deep Dive */}
-      <section className="bg-secondary/10 py-20 border-t border-border/40">
-        <div className="container mx-auto px-6 max-w-4xl">
-          <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 bg-white shadow-sm border-0 text-foreground">
-              Niveau 2 : Approfondissement Technique
-            </Badge>
-            <h2 className="text-3xl font-bold">Comment j'ai construit ça</h2>
-          </div>
-
-          <div className="grid gap-12 relative">
-            {/* Vertical Line */}
-            <div className="absolute left-[21px] top-4 bottom-4 w-0.5 bg-border hidden md:block" />
-
-            {/* Step 1: Challenge */}
-            <div className="flex gap-8 relative">
-              <div className="hidden md:flex w-12 h-12 rounded-full bg-white border-4 border-secondary items-center justify-center shrink-0 shadow-sm z-10 text-secondary-foreground font-bold">
-                1
-              </div>
-              <div className="space-y-4 bg-white p-8 rounded-2xl shadow-sm border border-border/50 flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="p-2 bg-red-100 text-red-600 rounded-lg">
-                    <FileText className="w-5 h-5" />
-                  </div>
-                  <h3 className="text-xl font-bold">Le Défi Initial</h3>
-                </div>
-                <p className="text-muted-foreground font-serif leading-relaxed">
-                  {project.story.challenge}
-                </p>
-              </div>
+        {/* Level 1: Executive Summary */}
+        {/* MODIFICATION ICI : mb-18 -> mb-19 */}
+        <section className="container mx-auto px-6 mb-19">
+          <div className="flex flex-col lg:flex-row gap-12 items-start">
+            {/* Visual (Left) */}
+            <div className="w-full lg:w-3/5">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="rounded-[2.5rem] overflow-hidden shadow-2xl aspect-video relative group border-4 border-white/30"
+              >
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
             </div>
 
-            {/* Step 2: Solution */}
-            <div className="flex gap-8 relative">
-              <div className="hidden md:flex w-12 h-12 rounded-full bg-white border-4 border-primary items-center justify-center shrink-0 shadow-sm z-10 text-primary font-bold">
-                2
-              </div>
-              <div className="space-y-4 bg-white p-8 rounded-2xl shadow-sm border border-border/50 flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="p-2 bg-blue-100 text-blue-600 rounded-lg">
-                    <Settings className="w-5 h-5" />
-                  </div>
-                  <h3 className="text-xl font-bold">La Solution Technique</h3>
-                </div>
-                <p className="text-muted-foreground font-serif leading-relaxed">
-                  {project.story.solution}
+            {/* Content (Right) */}
+            <div className="w-full lg:w-2/5 space-y-8">
+              <div>
+                <Badge variant="outline" className="mb-4 text-sm text-black border-black/20 bg-white/40 px-3 py-1.5 backdrop-blur-sm">
+                  {project.context}
+                </Badge>
+                <h1 className="text-4xl md:text-5xl font-bold text-black mb-3 leading-tight">
+                  {project.title}
+                </h1>
+                <p className="text-2xl text-black/70 font-serif italic">
+                  {project.category}
                 </p>
-                <div className="mt-4 p-4 bg-slate-900 rounded-lg overflow-x-auto">
-                  <pre className="text-xs text-green-400 font-mono">
-{`// Exemple de logique de contrôle
+              </div>
+
+              <div className="prose prose-lg prose-slate text-foreground">
+                <p className="font-medium text-xl border-l-4 border-[#C08B7B] pl-6 py-3 bg-white/30 rounded-r-lg backdrop-blur-sm">
+                  {project.summary}
+                </p>
+              </div>
+
+              <div className="bg-white/40 backdrop-blur-md p-8 rounded-3xl border border-white/20 shadow-sm">
+                <h3 className="text-base font-bold uppercase tracking-wider text-black/80 mb-5 flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5" /> Ce que j'ai appris
+                </h3>
+                <ul className="space-y-4">
+                  {project.learnings.map((item: string, i: number) => (
+                    <li key={i} className="flex items-start gap-3 text-base text-black/80">
+                      <span className="w-2 h-2 rounded-full bg-[#C08B7B] mt-2.5 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="text-base font-bold uppercase tracking-wider text-black/60 mb-4">Technologies</h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((t: string) => (
+                    <Badge key={t} variant="secondary" className="px-4 py-1.5 text-sm bg-white/50 text-black border border-white/20 shadow-sm">
+                      {t}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Level 2: Technical Deep Dive */}
+        <section className="pt-12 pb-20">
+          <div className="container mx-auto px-6 max-w-4xl">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-4 bg-white/40 shadow-sm border-white/20 text-black backdrop-blur-sm text-sm px-4 py-1.5">
+                Niveau 2 : Approfondissement Technique
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold text-black">Comment j'ai construit ça</h2>
+            </div>
+
+            <div className="grid gap-12 relative">
+              {/* Vertical Line */}
+              <div className="absolute left-[19px] md:left-[27px] top-6 bottom-6 w-0.5 bg-black/10 block" />
+
+              {/* Step 1: Challenge */}
+              <div className="flex gap-3 md:gap-8 relative group">
+                <div className="flex w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/80 border-4 border-[#C08B7B] items-center justify-center shrink-0 shadow-lg z-10 text-black font-bold text-sm md:text-lg">
+                  1
+                </div>
+                <div className="space-y-4 bg-white/60 backdrop-blur-md p-5 md:p-10 rounded-[2.5rem] shadow-lg border border-white/40 flex-1 w-0 hover:bg-white/80 transition-colors duration-300">
+                  <div className="flex items-center gap-3 md:gap-4 mb-2">
+                    <div className="p-2 md:p-3 bg-red-100/50 text-red-600 rounded-xl">
+                      <FileText className="w-5 h-5 md:w-6 md:h-6" />
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-bold text-black">Le Défi Initial</h3>
+                  </div>
+                  <p className="text-black/70 font-serif leading-relaxed text-base md:text-lg break-words">
+                    {project.story.challenge}
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 2: Solution */}
+              <div className="flex gap-3 md:gap-8 relative group">
+                <div className="flex w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/80 border-4 border-black items-center justify-center shrink-0 shadow-lg z-10 text-black font-bold text-sm md:text-lg">
+                  2
+                </div>
+                <div className="space-y-4 bg-white/60 backdrop-blur-md p-5 md:p-10 rounded-[2.5rem] shadow-lg border border-white/40 flex-1 w-0 hover:bg-white/80 transition-colors duration-300">
+                  <div className="flex items-center gap-3 md:gap-4 mb-2">
+                    <div className="p-2 md:p-3 bg-blue-100/50 text-blue-600 rounded-xl">
+                      <Settings className="w-5 h-5 md:w-6 md:h-6" />
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-bold text-black">La Solution Technique</h3>
+                  </div>
+                  <p className="text-black/70 font-serif leading-relaxed text-base md:text-lg break-words">
+                    {project.story.solution}
+                  </p>
+                  <div className="mt-6 p-4 md:p-6 bg-black/90 rounded-2xl overflow-x-auto shadow-inner border border-white/10 max-w-full">
+                    <pre className="text-xs md:text-sm text-green-400 font-mono">
+  {`// Exemple de logique
 void calculateKinematics(float x, float y, float z) {
   float theta1 = atan2(y, x);
-  float D = (pow(x,2) + pow(y,2) + pow(z,2) - L1*L1 - L2*L2) / (2*L1*L2);
   // ... calculs complexes
+  float D = (pow(x,2) + pow(y,2));
 }`}
-                  </pre>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 3: Obstacles */}
-            <div className="flex gap-8 relative">
-              <div className="hidden md:flex w-12 h-12 rounded-full bg-white border-4 border-orange-300 items-center justify-center shrink-0 shadow-sm z-10 text-orange-600 font-bold">
-                3
-              </div>
-              <div className="space-y-4 bg-white p-8 rounded-2xl shadow-sm border border-border/50 flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="p-2 bg-orange-100 text-orange-600 rounded-lg">
-                    <Code className="w-5 h-5" />
+                    </pre>
                   </div>
-                  <h3 className="text-xl font-bold">Les Obstacles & Résilience</h3>
                 </div>
-                <p className="text-muted-foreground font-serif leading-relaxed">
-                  {project.story.obstacles}
-                </p>
+              </div>
+
+              {/* Step 3: Obstacles */}
+              <div className="flex gap-3 md:gap-8 relative group">
+                <div className="flex w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/80 border-4 border-[#FF9A8B] items-center justify-center shrink-0 shadow-lg z-10 text-black font-bold text-sm md:text-lg">
+                  3
+                </div>
+                <div className="space-y-4 bg-white/60 backdrop-blur-md p-5 md:p-10 rounded-[2.5rem] shadow-lg border border-white/40 flex-1 w-0 hover:bg-white/80 transition-colors duration-300">
+                  <div className="flex items-center gap-3 md:gap-4 mb-2">
+                    <div className="p-2 md:p-3 bg-orange-100/50 text-orange-600 rounded-xl">
+                      <Code className="w-5 h-5 md:w-6 md:h-6" />
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-bold text-black">Les Obstacles & Résilience</h3>
+                  </div>
+                  <p className="text-black/70 font-serif leading-relaxed text-base md:text-lg break-words">
+                    {project.story.obstacles}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Navigation Footer */}
-      <div className="border-t border-border bg-white">
-        <div className="container mx-auto grid grid-cols-2">
-          <Link href={`/project/${project.prevId}`}>
-            <a className="group p-8 md:p-12 border-r border-border hover:bg-secondary/10 transition-colors flex flex-col items-start text-left">
-              <span className="text-sm text-muted-foreground mb-2 flex items-center gap-2">
-                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Projet Précédent
-              </span>
-              <span className="text-lg md:text-xl font-bold text-foreground">Simulateur CFD</span>
-            </a>
-          </Link>
-          <Link href={`/project/${project.nextId}`}>
-            <a className="group p-8 md:p-12 hover:bg-primary/5 transition-colors flex flex-col items-end text-right">
-              <span className="text-sm text-muted-foreground mb-2 flex items-center gap-2">
-                Projet Suivant <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </span>
-              <span className="text-lg md:text-xl font-bold text-foreground">Dashboard IoT</span>
-            </a>
-          </Link>
-        </div>
+        </section>
       </div>
-    </div>
+
+      {/* ============================================================== */}
+      {/* BARRE DE NAVIGATION FLOTTANTE (Standardisée + Mobile Tweaks)   */}
+      {/* ============================================================== */}
+      <div className="fixed bottom-6 left-2 right-2 z-50 md:bottom-6 md:left-1/2 md:right-auto md:-translate-x-1/2 md:w-auto">
+        <motion.div 
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.2 }}
+          className="
+            flex items-center justify-between md:justify-center p-2 
+            rounded-full
+            bg-black/20 backdrop-blur-2xl
+            border border-white/10
+            shadow-[0_8px_32px_0_rgba(0,0,0,0.3),_inset_0_0_0_1px_rgba(255,255,255,0.1)]
+            w-full md:w-auto
+          "
+        >
+          {/* BOUTON ACCUEIL */}
+          <Link href="/">
+            <div className="relative px-3 py-3 md:px-5 md:py-3 cursor-pointer transition-all duration-300 group rounded-full text-white hover:text-white hover:bg-white/10">
+              <span className="relative z-10 font-medium text-sm md:text-base flex items-center gap-2">
+                Accueil
+              </span>
+            </div>
+          </Link>
+
+          {/* ESPACE */}
+          <div className="w-px h-6 bg-white/10 mx-1 md:mx-2" />
+
+          {/* GROUPE NAVIGATION PROJETS */}
+          <div className="flex items-center gap-0 md:gap-1">
+            {/* Précédent */}
+            <Link href={`/project/${project.prevId}`}>
+              <div className="relative p-3 md:p-3 cursor-pointer transition-all duration-300 group rounded-full text-white hover:text-white hover:bg-white/10" title="Projet Précédent">
+                 <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
+              </div>
+            </Link>
+
+            {/* Portfolio */}
+            <Link href="/portfolio">
+              <div className="relative px-3 py-3 md:px-5 md:py-3 cursor-pointer transition-all duration-300 group rounded-full text-white hover:text-white hover:bg-white/10">
+                <span className="relative z-10 font-medium text-sm md:text-base flex items-center gap-2">
+                  Portfolio
+                </span>
+              </div>
+            </Link>
+
+            {/* Suivant */}
+            <Link href={`/project/${project.nextId}`}>
+              <div className="relative p-3 md:p-3 cursor-pointer transition-all duration-300 group rounded-full text-white hover:text-white hover:bg-white/10" title="Projet Suivant">
+                 <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
+              </div>
+            </Link>
+          </div>
+
+          {/* ESPACE */}
+          <div className="w-px h-6 bg-white/10 mx-1 md:mx-4" />
+
+          {/* BOUTON CONTACT */}
+          <Link href="/contact">
+            <div className="relative px-3 py-3 md:px-5 md:py-3 cursor-pointer transition-all duration-300 group rounded-full text-white hover:text-white hover:bg-white/10">
+              <span className="relative z-10 font-medium text-sm md:text-base flex items-center gap-2">
+                Contact
+              </span>
+            </div>
+          </Link>
+
+        </motion.div>
+      </div>
+
+    </motion.div>
   );
 }
