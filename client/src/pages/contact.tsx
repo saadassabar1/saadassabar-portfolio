@@ -87,6 +87,21 @@ export default function Contact() {
                     <p className="text-black/60 font-medium">saadassabar1@gmail.com</p>
                   </div>
                 </div>
+                <div className="flex items-start gap-4 group">
+                  <div className="w-12 h-12 bg-white/40 backdrop-blur-md rounded-full flex items-center justify-center text-black shadow-sm group-hover:scale-110 transition-transform duration-300">
+                    <MapPin className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg text-black">Localisation</h3>
+                    <p className="text-black/60 font-medium">Quebec, Canada & À </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-6 bg-white/30 backdrop-blur-md rounded-2xl shadow-sm border border-white/20">
+                <p className="text-sm text-black/80 font-serif italic">
+                  Je réponds généralement en moins de 24 heures, sauf si je suis en train de debugger une boucle infinie.
+                </p>
               </div>
             </div>
 
@@ -146,17 +161,18 @@ export default function Contact() {
         </div>
       </div>
 
-{/* ============================================================== */}
-      {/* BARRE DE NAVIGATION FLOTTANTE (AJOUTÉE)                         */}
       {/* ============================================================== */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+      {/* BARRE DE NAVIGATION FLOTTANTE                                  */}
+      {/* ============================================================== */}
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-auto">
         <motion.div 
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.5 }}
+          transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.2 }}
           className="
-            flex items-center gap-1 p-2 rounded-full 
-            bg-black/20 backdrop-blur-2xl 
+            flex items-center gap-1 p-2 
+            rounded-full
+            bg-black/20 backdrop-blur-2xl
             border border-white/10
             shadow-[0_8px_32px_0_rgba(0,0,0,0.3),_inset_0_0_0_1px_rgba(255,255,255,0.1)]
           "
