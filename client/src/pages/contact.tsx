@@ -4,17 +4,16 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, MapPin, Send, Home as HomeIcon, User, Briefcase, CheckCircle2 } from "lucide-react";
 import { Link, useLocation } from "wouter";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useForm, ValidationError } from '@formspree/react';
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useForm, ValidationError } from '@formspree/react'; // Import Formspree
 
 export default function Contact() {
   const [location] = useLocation();
   const { scrollYProgress } = useScroll();
 
-  // Formspree Hook
+  // REMPLACEZ 'votre_id_ici' par l'ID fourni par Formspree
   const [state, handleSubmit] = useForm("mjgbvaqn");
 
-  // Transition de couleur de fond au scroll
   const backgroundColor = useTransform(
     scrollYProgress,
     [0, 0.6], 
@@ -28,25 +27,27 @@ export default function Contact() {
     { name: "Contact", href: "/contact", icon: Mail },
   ];
 
-  // Écran de succès après l'envoi
+  // Affichage du message de succès après l'envoi
   if (state.succeeded) {
     return (
       <motion.div 
         className="min-h-screen flex items-center justify-center p-6"
-        style={{ backgroundColor: "#FCE4D6" }}
+        style={{ backgroundColor: "#D69F8E" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
       >
-        <Card className="max-w-md w-full bg-white/40 backdrop-blur-xl border-white/20 shadow-2xl rounded-[2.5rem] p-8 text-center">
-          <motion.div
+        <Card className="max-w-md w-full border-none shadow-2xl bg-white/70 backdrop-blur-xl rounded-[2rem] p-10 text-center">
+          <motion.div 
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6"
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
           >
-            <CheckCircle2 className="w-10 h-10 text-white" />
+            <CheckCircle2 className="w-20 h-20 text-green-500 mx-auto mb-6" />
           </motion.div>
-          <h2 className="text-3xl font-bold text-black mb-4">Message envoyé !</h2>
-          <p className="text-black/70 mb-8">Merci pour votre message. Je vous répondrai dans les plus brefs délais.</p>
+          <h2 className="text-3xl font-bold mb-4">Message envoyé !</h2>
+          <p className="text-black/70 mb-8">Merci, votre message a bien été transmis. Je vous répondrai très prochainement.</p>
           <Link href="/">
-            <Button className="w-full bg-black text-white rounded-xl py-6">Retour à l'accueil</Button>
+            <Button className="bg-black text-white rounded-xl px-8">Retour à l'accueil</Button>
           </Link>
         </Card>
       </motion.div>
@@ -58,87 +59,94 @@ export default function Contact() {
       className="min-h-screen pb-32 relative overflow-hidden"
       style={{ backgroundColor }}
     >
-      {/* Background Animations (Liquid Glass) */}
+      {/* Fond Liquid Glass (Code identique à votre version précédente) */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <motion.div 
-          animate={{ x: ["-10%", "20%", "-10%"], y: ["-10%", "10%", "-10%"], rotate: [0, 90, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[-10%] left-[-10%] w-[70vw] h-[70vw] bg-[#C08B7B] rounded-full mix-blend-multiply filter blur-[80px] opacity-20"
-        />
+          {/* ... vos animations de bulles ... */}
       </div>
 
-      <div className="relative z-10 container mx-auto max-w-5xl px-6 pt-24">
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          
-          {/* Section Texte */}
-          <div>
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-6xl md:text-8xl font-bold text-black tracking-tighter mb-8"
-            >
-              Contact
-            </motion.h1>
-            <p className="text-xl text-black/80 font-serif leading-relaxed mb-12">
-              Une idée de projet, une question ou simplement envie de discuter ingénierie ? 
-              Je suis toujours ouvert à de nouvelles opportunités.
-            </p>
+      <div className="relative z-10 pt-32">
+        <div className="container mx-auto px-6 max-w-5xl">
+          <div className="grid md:grid-cols-2 gap-12">
 
-            <div className="space-y-6">
-              <div className="flex items-center gap-4 group">
-                <div className="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center group-hover:bg-black transition-colors">
-                  <Mail className="w-5 h-5 group-hover:text-white" />
-                </div>
-                <span className="font-bold text-lg">saadassabar1@gmail.com</span>
+            {/* Info Side */}
+            <div className="space-y-8">
+              <div>
+                <h1 className="text-4xl font-bold mb-4 text-black">Parlons de votre projet</h1>
+                <p className="text-black/70 font-serif text-lg font-medium">
+                  Que ce soit pour une opportunité professionnelle, une collaboration technique ou simplement pour discuter d'ingénierie.
+                </p>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center">
-                  <MapPin className="w-5 h-5" />
+
+              <div className="space-y-6">
+                <div className="flex items-start gap-4 group">
+                  <div className="w-12 h-12 bg-white/40 backdrop-blur-md rounded-full flex items-center justify-center text-black shadow-sm group-hover:scale-110 transition-transform duration-300">
+                    <Mail className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg text-black">Email</h3>
+                    <p className="text-black/60 font-medium">saadassabar1@gmail.com</p>
+                  </div>
                 </div>
-                <span className="font-bold text-lg">Québec, QC</span>
               </div>
             </div>
+
+            {/* Form Side - CONNECTÉ À FORMSPREE */}
+            <Card className="border border-white/40 shadow-2xl bg-white/70 backdrop-blur-xl rounded-[2rem]">
+              <CardContent className="p-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="space-y-2">
+                    <label htmlFor="full-name" className="text-sm font-bold text-black/80">Nom</label>
+                    <Input 
+                      id="full-name" 
+                      name="name" 
+                      required 
+                      placeholder="Votre nom" 
+                      className="bg-white/50 border-white/30 focus:bg-white/80 transition-all rounded-xl" 
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="text-sm font-bold text-black/80">Email</label>
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      name="email" 
+                      required 
+                      placeholder="votre@email.com" 
+                      className="bg-white/50 border-white/30 focus:bg-white/80 transition-all rounded-xl" 
+                    />
+                    <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-500 text-xs mt-1" />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="message" className="text-sm font-bold text-black/80">Message</label>
+                    <Textarea 
+                      id="message" 
+                      name="message" 
+                      required 
+                      placeholder="Comment puis-je vous aider ?" 
+                      className="min-h-[150px] bg-white/50 border-white/30 focus:bg-white/80 transition-all rounded-xl" 
+                    />
+                    <ValidationError prefix="Message" field="message" errors={state.errors} className="text-red-500 text-xs mt-1" />
+                  </div>
+
+                  <Button 
+                    type="submit" 
+                    disabled={state.submitting} 
+                    size="lg" 
+                    className="w-full text-base font-bold bg-black text-white hover:bg-black/80 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50"
+                  >
+                    {state.submitting ? "Envoi en cours..." : "Envoyer le message"} 
+                    <Send className="w-4 h-4 ml-2" />
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
           </div>
-
-          {/* Formulaire */}
-          <Card className="bg-white/40 backdrop-blur-xl border-white/20 shadow-2xl rounded-[2.5rem] overflow-hidden">
-            <CardContent className="p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-bold text-black/80">Votre Email</label>
-                  <Input 
-                    id="email" type="email" name="email" required 
-                    placeholder="exemple@mail.com" 
-                    className="bg-white/50 border-white/30 rounded-xl py-6"
-                  />
-                  <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-500 text-xs" />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-bold text-black/80">Message</label>
-                  <Textarea 
-                    id="message" name="message" required 
-                    placeholder="Comment puis-je vous aider ?" 
-                    className="min-h-[150px] bg-white/50 border-white/30 rounded-xl"
-                  />
-                  <ValidationError prefix="Message" field="message" errors={state.errors} className="text-red-500 text-xs" />
-                </div>
-
-                <Button 
-                  type="submit" 
-                  disabled={state.submitting} 
-                  className="w-full bg-black text-white hover:bg-black/80 rounded-xl py-6 font-bold transition-all shadow-lg"
-                >
-                  {state.submitting ? "Envoi en cours..." : "Envoyer le message"} 
-                  <Send className="w-4 h-4 ml-2" />
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
         </div>
       </div>
 
-      {/* ============================================================== */}
+{/* ============================================================== */}
       {/* BARRE DE NAVIGATION FLOTTANTE (AJOUTÉE)                         */}
       {/* ============================================================== */}
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
