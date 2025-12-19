@@ -83,13 +83,13 @@ export default function About() {
             </div>
             <div className="w-full md:w-2/3 space-y-6">
               <h1 className="text-4xl font-bold text-black">
-                Plus qu'un Ingénieur. <br/>
-                <span className="text-[#C08B7B] font-serif italic">Un Humain Curieux.</span>
+                Plus qu'un ingénieur. <br/>
+                <span className="text-[#C08B7B] font-serif italic">Un humain curieux.</span>
               </h1>
               <div className="prose prose-lg text-black/70 font-serif font-medium leading-relaxed">
                 <p>
                   Pourquoi le génie ? Parce que j'ai toujours voulu comprendre "comment ça marche". 
-                  Enfant, je démontais mes jouets. Aujourd'hui, je démonte des problèmes complexes pour construire des solutions durables.
+                  Enfant, je démontais mes jouets. Aujourd'hui, je démonte des problèmes complexes.
                 </p>
                 <p>
                   Je crois fermement que la technologie sans empathie est inutile. C'est pourquoi je m'efforce de concevoir des systèmes non seulement performants, mais aussi intuitifs et agréables à utiliser.
