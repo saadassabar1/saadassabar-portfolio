@@ -135,7 +135,7 @@ export default function Contact() {
                     disabled={state.submitting} 
                     size="lg" 
                     className="w-full text-base font-bold bg-black text-white hover:bg-black/80 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50"
-                  >
+                  
                     {state.submitting ? "Envoi en cours..." : "Envoyer le message"} 
                     <Send className="w-4 h-4 ml-2" />
                   </Button>
