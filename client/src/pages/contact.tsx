@@ -93,7 +93,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-bold text-lg text-black">Localisation</h3>
-                    <p className="text-black/60 font-medium">Quebec, Canada & À </p>
+                    <p className="text-black/60 font-medium">Quebec, Canada & À distance</p>
                   </div>
                 </div>
               </div>
