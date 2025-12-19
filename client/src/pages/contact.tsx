@@ -45,7 +45,7 @@ export default function Contact() {
             <CheckCircle2 className="w-20 h-20 text-green-500 mx-auto mb-6" />
           </motion.div>
           <h2 className="text-3xl font-bold mb-4">Message envoyé !</h2>
-          <p className="text-black/70 mb-8">Merci Saad, votre message a bien été transmis. Je vous répondrai très prochainement.</p>
+          <p className="text-black/70 mb-8">Merci, votre message a bien été transmis. Je vous répondrai très prochainement.</p>
           <Link href="/">
             <Button className="bg-black text-white rounded-xl px-8">Retour à l'accueil</Button>
           </Link>

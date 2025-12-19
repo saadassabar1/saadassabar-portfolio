@@ -9,6 +9,7 @@ export default function Home() {
   const [location] = useLocation();
   const { scrollYProgress } = useScroll();
 
+  // --- TRANSITION DE COULEUR ---
   const backgroundColor = useTransform(
     scrollYProgress,
     [0, 0.6], 
@@ -73,36 +74,53 @@ export default function Home() {
       className="min-h-screen pb-32 relative overflow-hidden"
       style={{ backgroundColor }}
     >
+
       {/* FOND LIQUID GLASS */}
       <div className="fixed inset-0 z-0 pointer-events-none">
           <motion.div 
-            animate={{ x: ["-20%", "40%", "-20%"], y: ["-20%", "10%", "-20%"], rotate: [0, 180, 360], scale: [1, 1.2, 1] }}
+            animate={{
+              x: ["-20%", "40%", "-20%"],
+              y: ["-20%", "10%", "-20%"],
+              rotate: [0, 180, 360],
+              scale: [1, 1.2, 1],
+            }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
             style={{ willChange: "transform" }}
             className="absolute top-[-20%] left-[-20%] w-[90vw] h-[90vw] bg-[#C08B7B] rounded-full mix-blend-multiply filter blur-[100px] opacity-20"
           />
+
           <motion.div 
-            animate={{ x: ["20%", "-30%", "20%"], y: ["20%", "-20%", "20%"], scale: [1.2, 0.8, 1.2] }}
+            animate={{
+              x: ["20%", "-30%", "20%"],
+              y: ["20%", "-20%", "20%"],
+              scale: [1.2, 0.8, 1.2],
+            }}
             transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
             style={{ willChange: "transform" }}
             className="absolute top-[20%] right-[-20%] w-[80vw] h-[80vw] bg-[#FF9A8B] rounded-full mix-blend-multiply filter blur-[90px] opacity-25"
           />
+
           <motion.div 
-            animate={{ scale: [1, 1.3, 1], x: ["-10%", "10%", "-10%"], opacity: [0.4, 0.7, 0.4] }}
+            animate={{
+              scale: [1, 1.3, 1],
+              x: ["-10%", "10%", "-10%"],
+              opacity: [0.4, 0.7, 0.4],
+            }}
             transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
             style={{ willChange: "transform" }}
             className="absolute bottom-[-10%] left-[20%] w-[60vw] h-[60vw] bg-white rounded-full mix-blend-overlay filter blur-[80px]"
           />
+
           <div className="absolute inset-0 opacity-[0.06] mix-blend-multiply" 
                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} 
           />
       </div>
 
       <div className="relative z-10">
-        {/* Hero Section - Passage en 16/9 sur Desktop */}
+        {/* Hero Section */}
         <section className="px-4 pt-0 pb-8 md:px-6">
-          <div className="container mx-auto max-w-4xl relative"> 
-            <div className="relative aspect-[4/5] md:aspect-[16/9] rounded-b-[2rem] md:rounded-b-[3.5rem] rounded-t-none overflow-hidden bg-black shadow-2xl">
+          <div className="container mx-auto max-w-2xl relative">
+            <div className="relative aspect-[4/5] md:aspect-[3/2] rounded-b-[2rem] md:rounded-b-[3rem] rounded-t-none overflow-hidden bg-black shadow-2xl">
               <div className="absolute inset-0 w-full h-full">
                 <AnimatePresence mode="wait">
                   <motion.img 
@@ -116,6 +134,7 @@ export default function Home() {
                       transition={{ duration: 0 }}
                   />
                 </AnimatePresence>
+
                 <AnimatePresence>
                   <motion.div
                     key={`flash-${currentImageIndex}`}
@@ -130,13 +149,13 @@ export default function Home() {
 
               <div className="absolute inset-0 bg-black/10 z-20 pointer-events-none" />
 
-              <div className="absolute inset-0 flex flex-col justify-end pb-12 md:pb-14 z-20 pointer-events-none">
-                <div className="flex flex-col relative w-full px-8 md:px-20">
+              <div className="absolute inset-0 flex flex-col justify-end pb-12 md:pb-20 z-20 pointer-events-none">
+                <div className="flex flex-col relative w-full px-8 md:px-16">
                   <motion.h1 
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1, delay: 0.2 }}
-                    className="text-[15vw] md:text-[8.5rem] font-bold leading-[0.8] text-[#FCE4D5] tracking-tighter text-right self-end"
+                    className="text-[15vw] md:text-[8rem] font-bold leading-[0.8] text-[#FCE4D5] mix-blend-normal tracking-tighter text-right self-end"
                   >
                     Saad
                   </motion.h1>
@@ -144,7 +163,7 @@ export default function Home() {
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1, delay: 0.4 }}
-                    className="text-[15vw] md:text-[8.5rem] font-bold leading-[0.8] text-[#FCE4D5] tracking-tighter text-left self-start mt-2 md:mt-3"
+                    className="text-[15vw] md:text-[8rem] font-bold leading-[0.8] text-[#FCE4D5] mix-blend-normal tracking-tighter text-left self-start mt-2 md:mt-4"
                   >
                     Assabar
                   </motion.h1>
@@ -154,35 +173,41 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Bio & CTA - Largeur max 3xl pour le confort de lecture */}
-        <section className="px-6 container mx-auto max-w-3xl mt-4"> 
+        {/* Bio & CTA */}
+        <section className="px-6 container mx-auto max-w-2xl mt-1">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <p className="text-xl md:text-2xl font-serif leading-relaxed text-black font-bold text-center md:text-justify">
+            <p className="text-xl md:text-2xl font-serif leading-relaxed text-black font-bold text-justify">
               Futur ingénieur passionné par la convergence entre mécanique et logiciel. 
               Je conçois des systèmes complexes en les rendant simples et humains.
-              Basé à Québec, spécialisé en robotique et IoT.
+              Basé à Québec, citoyen du monde.
             </p>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.7 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ 
               opacity: 1, 
               scale: 1.15, 
-              transition: { type: "spring", stiffness: 600, damping: 20, delay: 0 }
+              transition: { 
+                type: "spring", 
+                stiffness: 400, // Animation plus rapide et nerveuse
+                damping: 15,
+                delay: 0.1 
+              }
             }}
-            viewport={{ once: true, margin: "0px 0px -20% 0px" }}
-            className="text-center mt-[4rem]"
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-center mt-[3.125rem]"
           >
             <Link href="/portfolio">
               <Button 
                 size="lg" 
-                className="relative overflow-hidden group border-none bg-transparent rounded-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.6),inset_0_-1px_0_0_rgba(0,0,0,0.2),0_10px_30px_-10px_rgba(255,111,97,0.8)] border border-white/20 px-12 py-6 text-lg md:px-24 md:py-8 md:text-2xl transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.8),0_20px_40px_-10px_rgba(255,111,97,1)]"
+                className="relative overflow-hidden group border-none bg-transparent rounded-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.6),inset_0_-1px_0_0_rgba(0,0,0,0.2),0_10px_30px_-10px_rgba(255,111,97,0.8)] border border-white/20 px-12 py-6 text-lg md:px-[8.5rem] md:py-8 md:text-2xl transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.8),0_20px_40px_-10px_rgba(255,111,97,1)]"
               >
+                {/* COUCHE 1 : LE FLUIDE ORGANIQUE */}
                 <div className="absolute inset-0 w-[200%] h-[200%] -top-1/2 -left-1/2">
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-tr from-[#FF6F61] via-[#D65D52] to-[#FF9A8B]"
@@ -191,7 +216,9 @@ export default function Home() {
                     style={{ filter: "blur(40px)" }}
                   />
                 </div>
+                {/* COUCHE 2 : SURFACE VERRE */}
                 <div className="absolute inset-0 bg-white/5 backdrop-blur-[1px]" />
+                {/* COUCHE 3 : REFLET */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out skew-x-12" />
                 <span className="relative z-10 text-white font-bold tracking-widest uppercase text-sm md:text-lg drop-shadow-md">
                   Découvrir mes projets
@@ -201,9 +228,9 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* Projects Section */}
-        <section className="pl-6 overflow-hidden mt-32">
-          <div className="container mx-auto mb-6 max-w-4xl">
+        {/* Projects Pastilles */}
+        <section className="pl-6 overflow-hidden mt-24">
+          <div className="container mx-auto mb-6">
             <h2 className="text-2xl font-bold uppercase tracking-widest text-black">Projets Récents</h2>
           </div>
           <div className="flex gap-6 overflow-x-auto pb-6 pr-6 snap-x snap-mandatory scrollbar-hide">
@@ -236,7 +263,7 @@ export default function Home() {
         </section>
 
         {/* Contact CTA */}
-        <section className="container mx-auto max-w-4xl px-6 pb-24 mt-32">
+        <section className="container mx-auto max-w-5xl px-6 pb-24 mt-32">
           <div className="flex flex-row items-end justify-between w-full">
             <div className="flex flex-col items-start gap-4">
                 <h2 className="text-3xl md:text-4xl font-bold text-black lowercase tracking-wide" style={{ fontFamily: '"Fraunces", serif' }}>
